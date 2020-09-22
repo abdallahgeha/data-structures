@@ -1,10 +1,6 @@
 import { useState, useRef } from "react";
 import DoublyLinked from '../../components/doublyLinked'
 
-export interface StackProps {
-
-}
-
 type DoublyLink = { 
   value: string | number, 
   visible: boolean ,
@@ -12,7 +8,7 @@ type DoublyLink = {
   previous? : string
 }
 
-const Stack: React.SFC<StackProps> = () => {
+const Stack: React.FC = () => {
 
   const [stack, changeStack] = useState<DoublyLink[]>([
     { value: "2", visible: true },

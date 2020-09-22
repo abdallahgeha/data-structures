@@ -17,7 +17,7 @@ export interface LinkedProps {
 }
 
 
-const Tree: React.SFC<LinkedProps> = ({ stack }) => {
+const Tree: React.FC<LinkedProps> = ({ stack }) => {
   return (
     <div id="link">
       <ArcherContainer strokeColor='red' >

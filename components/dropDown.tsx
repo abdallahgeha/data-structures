@@ -1,13 +1,23 @@
-import Link from 'next/link'
+import Link from 'next/link';
+import { useRef } from 'react';
+import useOnClickOutside from '../hooks/useOnClickOutside'
 
 export interface DropDownProps {
   dataStructures: { name: String, link: String, img: String }[]
-  drop: (event: React.MouseEvent<HTMLDivElement>) => void
+  drop: (event: React.MouseEvent<HTMLDivElement>) => void;
+  rollUp: () => void
 }
 
-const DropDown: React.SFC<DropDownProps> = ({ dataStructures, drop }) => {
+const DropDown: React.FC<DropDownProps> = ({ dataStructures, drop, rollUp }) => {
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  const handleClickOutside = () => rollUp()
+
+  useOnClickOutside(ref, handleClickOutside)
+
   return (
-    <div className="dropdown-content" onClick={drop}>
+    <div className="dropdown-content" onClick={drop} ref={ref}>
       {dataStructures.map((dataStructure, i) => (
         <Link key={i} href={`/dataStructure${dataStructure.link}`}>
           <a className="dataStructuesLink" >{dataStructure.name}</a>

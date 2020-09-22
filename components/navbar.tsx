@@ -7,10 +7,14 @@ export interface NavBarProps {
 
 }
 
-const NavBar: React.SFC<NavBarProps> = () => {
-  let [isdroped, drop] = useState(false)
+const NavBar: React.FC<NavBarProps> = () => {
+  const [isdroped, drop] = useState(false)
 
-  let dropdown = () => drop(!isdroped)
+  const dropdown = () => drop(!isdroped)
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    drop(!isdroped)
+  }
 
   return (
     <nav>
@@ -22,8 +26,8 @@ const NavBar: React.SFC<NavBarProps> = () => {
         <Link href="/learnmore"><a>Learn More</a></Link>
         <Link href="/contact"><a>Contact</a></Link>
         <div className="dropdown">
-          <button onClick={dropdown} className="dropbtn">Data Structures</button>
-          {isdroped ? <DropDown drop={dropdown} dataStructures={dataStructuresList} /> : null}
+          <button onClick={(e) => handleButtonClick(e)} className="dropbtn">Data Structures</button>
+          {isdroped ? <DropDown rollUp={dropdown} drop={dropdown} dataStructures={dataStructuresList} /> : null}
         </div>
       </div>
       <style jsx>{`

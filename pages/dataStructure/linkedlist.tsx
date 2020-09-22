@@ -1,47 +1,41 @@
 import { useState, useRef } from "react";
 import Linked from '../../components/linked'
-
-export interface LinkedListProps {
-
-}
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 type Link = { 
   value: string | number, 
   visible: boolean ,
   next?: string
 }
+type stackLocalStorage = [Link[], (value: Link[]) => void];
 
 
-const LinkedList: React.SFC<LinkedListProps> = () => {
+const LinkedList: React.FC = () => {
 
-  const [stack, changeStack] = useState<Link[]>([
+  const [links, changeLinks] = useLocalStorage<Link[]>('links', [
     { value: "2", visible: true },
     { value: "1", visible: true },
-    { value: "5", visible: true }])
+    { value: "5", visible: true }]) as stackLocalStorage
 
   const [staValue, setStaValue] = useState<string | number>("");
   const [topValue, setTopValue] = useState<string | number>("")
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  let stacks = stack.map((sta, i) => (
-    <div key={`stack ${i}`} className={sta.visible ? "sta" : "staDelete"}>{sta.value}</div>
-  ))
-
-  const popFromStack = () => {
-    let newStack = [...stack]
-    if (newStack[stack.length - 1]) { newStack[stack.length - 1].visible = false }
-    changeStack(newStack)
+  const popFromLinks = () => {
+    let newLinks = [...links]
+    if (newLinks[links.length - 1]) { newLinks[links.length - 1].visible = false }
+    changeLinks(newLinks)
     setTimeout(() => {
-      changeStack(stack.splice(0, stack.length - 1))
+      changeLinks(links.splice(0, links.length - 1))
     }, 350)
 
 
   }
-  const pushToStack = (staValue: string | number) => {
+  const pushToLinks = (staValue: string | number) => {
 
     if (staValue) {
-      changeStack([...stack, { value: staValue, visible: true }])
+      changeLinks([...links, { value: staValue, visible: true }])
       setStaValue("")
       inputRef.current?.focus()
     }
@@ -52,12 +46,12 @@ const LinkedList: React.SFC<LinkedListProps> = () => {
 
   const keypressEnter = (e: React.KeyboardEvent) => {
     if (e.key == "Enter") {
-      pushToStack(staValue)
+      pushToLinks(staValue)
     }
   }
 
   const peek = () => {
-    let toppestVal = stack[stack.length - 1]?.value || '';
+    let toppestVal = links[links.length - 1]?.value || '';
     setTopValue(toppestVal)
   }
 
@@ -69,10 +63,10 @@ const LinkedList: React.SFC<LinkedListProps> = () => {
   return (
     <div className="page">
       <div id="stackDash">
-        <button onClick={popFromStack}>POP</button>
+        <button onClick={popFromLinks}>POP</button>
 
         <div className="push">
-          <button onClick={() => pushToStack(staValue)}>PUSH</button>
+          <button onClick={() => pushToLinks(staValue)}>PUSH</button>
           <input onChange={(e) => changeValue(e)}
             value={staValue}
             type="text"
@@ -90,7 +84,7 @@ const LinkedList: React.SFC<LinkedListProps> = () => {
 
       </div>
 
-      <Linked stack={stack}/>
+      <Linked links={links}/>
 
     </div>
   );

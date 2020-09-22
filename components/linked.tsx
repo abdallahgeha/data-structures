@@ -12,11 +12,11 @@ export interface LinkList {
 }
 
 export interface LinkedProps {
-  stack: LinkList[]
+  links: LinkList[]
 }
 
 
-const Linked: React.SFC<LinkedProps> = ({ stack }) => {
+const Linked: React.FC<LinkedProps> = ({ links }) => {
   return (
     <div id="link">
       <ArcherContainer strokeColor='red' >
@@ -25,7 +25,7 @@ const Linked: React.SFC<LinkedProps> = ({ stack }) => {
           <ArcherElement
             id="HEAD"
             relations={[{
-              targetId: (stack.length !== 0 ) ? 'element1' : 'NULL',
+              targetId: (links.length !== 0 ) ? 'element1' : 'NULL',
               targetAnchor: 'left',
               sourceAnchor: 'right',
               style: arrow,
@@ -35,7 +35,7 @@ const Linked: React.SFC<LinkedProps> = ({ stack }) => {
             <div style={borderBoxStyle}>HEAD</div>
           </ArcherElement>
 
-          {stack.map((e,i,list) => (
+          {links.map((e,i,list) => (
             <ArcherElement
             key={`archerelement${i}`}
             id={`element${i+1}`}
