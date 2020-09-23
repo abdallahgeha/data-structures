@@ -22,6 +22,9 @@ export default function About() {
           font-size: 56px;
           padding-left: 20px;
         }
+
+        
+
       `}
       </style>
     </div>

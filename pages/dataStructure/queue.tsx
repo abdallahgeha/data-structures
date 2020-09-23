@@ -17,23 +17,24 @@ const Queue: React.FC = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  let queues = que.map((sta, i) => (
-    <div key={`stack ${i}`} className={sta.visible ? "sta" : "staDelete"}>{sta.value}</div>
+  let queues = que.map((qu, i) => (
+    <div key={`queue ${i}`} className={qu.visible ? "que" : "queDelete"}>{qu.value}</div>
   ))
 
   const dequeue = () => {
-    let newStack = [...que]
-    if (newStack[que.length - 1]) { newStack[que.length - 1].visible = false }
-    changeQue(newStack)
+    let newQueue = [...que]
+    if (newQueue[0]) { newQueue[0].visible = false }
+    changeQue(newQueue)
     setTimeout(() => {
-      changeQue(que.splice(0, que.length - 1))
-    }, 350)
+      let update = newQueue.slice(1, newQueue.length)
+      changeQue(update)
+    }, 500)
 
   }
 
   const enqueue = (queValue: string | number) => {
     if (queValue) {
-      changeQue([{ value: queValue, visible: true }, ...que])
+      changeQue([...que, { value: queValue, visible: true }])
       setQueValue("")
       inputRef.current?.focus()
     }
@@ -73,6 +74,70 @@ const Queue: React.FC = () => {
       <div id="queue">
         {queues}
       </div>
+
+      <style>
+        {`
+
+        #queue {
+          border-radius: 15px;
+          width: 400px;
+          height: 55vh;
+          display: flex;
+          flex-flow: column;
+          justify-content: flex-start;
+          align-items: center;
+          background: #f3f3f3;
+          margin-top: 10px;
+          margin-bottom: 100px;
+          padding-bottom: 20px;
+        }
+
+        .que {
+          height: 11%;
+          margin-top: 5px;
+          border-radius: 8px;
+          width: 340px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #4CAF50;
+          transition: transform 1.5s 0s, opacity 1.25s 0s;
+          transform: translateX(0);
+          animation: queueUp 500ms cubic-bezier(.68,-0.55,.27,1.55);
+          transition-duration: 500ms;
+          opacity: 1;
+          color: white;
+          font-weight: bolder;
+        }
+        
+        .queDelete {
+          height: 40px;
+          margin-top: 5px;
+          border-radius: 8px;
+          width: 340px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #4CAF50;
+          transition: transform 1.5s 0s, opacity 1.25s 0s;
+          transform: translateX(0);
+          animation-duration: 500ms;
+          transition-duration: 500ms;
+          transform: translateX(-50%);
+          opacity: 0;
+        }
+
+        @keyframes queueUp {
+          0% {
+              transform: translateY(50px);
+              opacity: 0.0;       
+          }   
+          100% {
+              transform: translateY(0);
+              opacity: 1; 
+          }  
+        `}
+      </style>
     </div>
   );
 }

@@ -36,6 +36,7 @@ const Form: React.FC<FormProps> = () => {
   }
 
   return (
+    <>
     <form
       onSubmit={submitForm}
       action="https://formspree.io/mpzozrbe"
@@ -69,6 +70,76 @@ const Form: React.FC<FormProps> = () => {
       </div>
 
     </form>
+  <style>{`
+    #contactForm {
+      width: 50%;
+      background-color: #f3f3f3;
+      border-radius: 20px;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      box-shadow: 0px 25px 30px 0px rgba(0,0,0,0.5);
+      margin-left: 30px;
+    }
+    
+    .inputElement {
+      display: flex;
+      flex-flow: column;
+      width: 90%;
+      margin: 0.3rem 0;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+    
+    .inputElement input {
+      border: 1px solid #acacac;
+      height: 1.5rem;
+      border-radius: 3px;
+      padding: 0.2rem 0.6rem;
+      margin-top: 0.2rem;
+    }
+    
+    .submitElement {
+      width: 90%;
+      margin: 0.3rem 0;
+      font-weight: bold;
+      padding: 0.3rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .submitElement button {
+      width: 170px;
+      height: 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 8px;
+    }
+    
+    .submitElement button:hover {
+      cursor: pointer;
+      background-color: #03641b;
+    }
+
+    textarea {
+      margin-top: 0.2rem;
+      border: 1px solid #acacac;
+      border-radius: 3px;
+      resize: none;
+      height: 3rem;
+    }
+    
+    form h1 {
+      margin: 0.4rem 0;
+    }
+  `}</style>
+    </>
   );
 }
 

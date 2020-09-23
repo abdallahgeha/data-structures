@@ -70,6 +70,73 @@ const Stack: React.FC = () => {
         unPeek={unPeek}
         topValue={topValue} />
       <div id="stack">{stacks}</div>
+      <style>
+        {`
+
+        #stack {
+          border-radius: 15px;
+          width: 400px;
+          height: 55vh;
+          display: flex;
+          flex-flow: column-reverse;
+          justify-content: flex-start;
+          align-items: center;
+          background: #f3f3f3;
+          margin-top: 10px;
+          margin-bottom: 100px;
+          padding-bottom: 20px;
+        }
+
+        .sta {
+          height: 11%;
+          margin-top: 5px;
+          border-radius: 8px;
+          width: 340px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #4CAF50;
+          transition: transform 1.5s 0s, opacity 1.25s 0s;
+          transform: translateX(0);
+          animation-duration: 500ms;
+          transition-duration: 500ms;
+          opacity: 1;
+          color: white;
+          font-weight: bolder;
+        }
+        
+        .staDelete {
+          height: 40px;
+          margin-top: 5px;
+          border-radius: 8px;
+          width: 340px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #4CAF50;
+          transition: transform 1.5s 0s, opacity 1.25s 0s;
+          transform: translateX(0);
+          animation-duration: 500ms;
+          transition-duration: 500ms;
+          transform: translateX(-50%);
+          opacity: 0;
+        }
+        
+        .sta{
+          animation: fallDown 500ms cubic-bezier(.68,-0.55,.27,1.55);
+        }
+
+        @keyframes fallDown {
+          0% {
+              transform: translateY(-50px);
+              opacity: 0.0;       
+          }   
+          100% {
+              transform: translateY(0);
+              opacity: 1; 
+          }  
+        `}
+      </style>
     </div>
   );
 }

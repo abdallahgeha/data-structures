@@ -71,6 +71,7 @@ export default function Home() {
         align-items: center;
         background-color: #4CAF50;
         border-radius: 15px;
+        animation: fadeIn 1.5s ease-in-out;
       }
       
       .dataStructuesHomeLink:hover {
@@ -96,6 +97,24 @@ export default function Home() {
         color: #999999;
         font-size: 22px;
       }
+
+      @keyframes fadeIn {
+        0% {
+            transform: scale(0);
+            opacity: 0.0;       
+        }
+        60% {
+            transform: scale(1.1);  
+        }
+        80% {
+            transform: scale(0.9);
+            opacity: 1; 
+        }   
+        100% {
+            transform: scale(1);
+            opacity: 1; 
+        }       
+    }
         
         `}</style>
     </>
