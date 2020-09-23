@@ -6,7 +6,7 @@ import Footer from '../components/footer';
 import '../styles.css'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  let TIME_OUT = 300
+  let TIME_OUT = 150
   return (
     <>
       <NavBar />

@@ -3,11 +3,7 @@ import DropDown from './dropDown';
 import { dataStructuresList } from '../constant/dataStructures'
 import { useState } from 'react';
 
-export interface NavBarProps {
-
-}
-
-const NavBar: React.FC<NavBarProps> = () => {
+const NavBar: React.FC = () => {
   const [isdroped, drop] = useState(false)
 
   const dropdown = () => drop(!isdroped)

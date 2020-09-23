@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import useOnClickOutside from '../hooks/useOnClickOutside'
 
 export interface DropDownProps {
-  dataStructures: { name: String, link: String, img: String }[]
+  dataStructures: { name: String, link: String, img: String, available: boolean }[]
   drop: (event: React.MouseEvent<HTMLDivElement>) => void;
   rollUp: () => void
 }
@@ -18,11 +18,15 @@ const DropDown: React.FC<DropDownProps> = ({ dataStructures, drop, rollUp }) => 
 
   return (
     <div className="dropdown-content" onClick={drop} ref={ref}>
-      {dataStructures.map((dataStructure, i) => (
-        <Link key={i} href={`/dataStructure${dataStructure.link}`}>
-          <a className="dataStructuesLink" >{dataStructure.name}</a>
-        </Link>
-      ))}
+      {dataStructures.map((dataStructure, i) => {
+        if (dataStructure.available) {
+          return (
+            <Link key={i} href={`/dataStructure${dataStructure.link}`}>
+              <a className="dataStructuesLink" >{dataStructure.name}</a>
+            </Link>
+          )
+        }
+      })}
 
       <style>{`
         .dropdown-content {
