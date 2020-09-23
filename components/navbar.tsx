@@ -29,6 +29,8 @@ const NavBar: React.FC = () => {
       <style jsx>{`
       
       nav{
+        position: fixed;
+        top: 0;
         width: 100vw;
         display: flex;
         justify-content: space-around;
