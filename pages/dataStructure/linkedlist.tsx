@@ -1,90 +1,150 @@
 import { useState, useRef } from "react";
-import Linked from '../../components/linked'
-import useLocalStorage from "../../hooks/useLocalStorage";
+import Linked from '../../components/linked';
+import LinkedDash from '../../components/DashBoard/LinkedListDash'
+// import useLocalStorage from "../../hooks/useLocalStorage";
 
-type Link = { 
-  value: string | number, 
-  visible: boolean ,
-  next?: string
+type Link = {
+  value: string | number,
+  visible: boolean,
+  found: boolean
 }
-type stackLocalStorage = [Link[], (value: Link[]) => void];
+type LinkLocalStorage = [Link[], (value: Link[]) => void];
 
 
 const LinkedList: React.FC = () => {
 
-  const [links, changeLinks] = useLocalStorage<Link[]>('links', [
-    { value: "2", visible: true },
-    { value: "1", visible: true },
-    { value: "5", visible: true }]) as stackLocalStorage
+  const [links, changeLinks] = useState<Link[]>([
+    { value: "2", visible: true, found: false },
+    { value: "1", visible: true, found: false },
+    { value: "5", visible: true, found: false }]) as LinkLocalStorage
 
-  const [staValue, setStaValue] = useState<string | number>("");
-  const [topValue, setTopValue] = useState<string | number>("")
+  const [headValue, setHeadValue] = useState<string | number>("");
+  const [tailValue, setTailValue] = useState<string | number>("");
+  const [lookUpVal, setLookUpVal] = useState<string | number>("");
 
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const popFromLinks = () => {
+  const inputHeadRef = useRef<HTMLInputElement>(null);
+  const inputTailRef = useRef<HTMLInputElement>(null);
+  const inputLookRef = useRef<HTMLInputElement>(null);
+
+
+  const popFromHead = () => {
+    let newLinks = [...links]
+    if (newLinks[0]) { newLinks[0].visible = false }
+    changeLinks(newLinks)
+    setTimeout(() => {
+      let update = newLinks.slice(1, newLinks.length)
+      changeLinks(update)
+    }, 350)
+  }
+
+  const popFromTail = () => {
     let newLinks = [...links]
     if (newLinks[links.length - 1]) { newLinks[links.length - 1].visible = false }
     changeLinks(newLinks)
     setTimeout(() => {
       changeLinks(links.splice(0, links.length - 1))
     }, 350)
-
-
   }
-  const pushToLinks = (staValue: string | number) => {
 
-    if (staValue) {
-      changeLinks([...links, { value: staValue, visible: true }])
-      setStaValue("")
-      inputRef.current?.focus()
+
+  const addAtTail = (tailValue: string | number) => {
+
+    if (tailValue) {
+      changeLinks([...links, { value: tailValue, visible: true, found: false }])
+      setTailValue("")
+      inputTailRef.current?.focus()
     }
   }
-  const changeValue = (val: React.ChangeEvent<HTMLInputElement>) => {
-    setStaValue(val.target.value)
+
+  const addAtHead = (headValue: string | number) => {
+    if (headValue) {
+      changeLinks([{ value: headValue, visible: true, found: false }, ...links])
+      setHeadValue("")
+      inputHeadRef.current?.focus()
+    }
   }
 
-  const keypressEnter = (e: React.KeyboardEvent) => {
+
+  const changeHeadValue = (val: React.ChangeEvent<HTMLInputElement>) => {
+    setHeadValue(val.target.value)
+  }
+
+  const changeTailValue = (val: React.ChangeEvent<HTMLInputElement>) => {
+    setTailValue(val.target.value)
+  }
+
+  const changeLookValue = (val: React.ChangeEvent<HTMLInputElement>) => {
+    setLookUpVal(val.target.value)
+  }
+
+
+
+  
+  const find = (lookUpValue: string | number) => {
+    const foundLinks = [...links]
+    for (const link of links) {
+      if(link.value == lookUpValue){
+        link.found = true
+      }
+    }
+    
+    changeLinks(foundLinks)
+    inputLookRef.current?.focus()
+  }
+  
+  const unFind = () => {
+    const foundLinks = [...links]
+    for (const link of links) {
+      link.found = false
+    }
+    
+    changeLinks(foundLinks)
+  }
+
+  const keypressHead = (e: React.KeyboardEvent) => {
     if (e.key == "Enter") {
-      pushToLinks(staValue)
+      addAtHead(headValue)
     }
   }
 
-  const peek = () => {
-    let toppestVal = links[links.length - 1]?.value || '';
-    setTopValue(toppestVal)
+  const keypressTail = (e: React.KeyboardEvent) => {
+    if (e.key == "Enter") {
+      addAtTail(tailValue)
+    }
   }
-
-  const unPeek = () => {
-    setTopValue("")
+  
+  const keypressLook = (e: React.KeyboardEvent) => {
+    if (e.key == "Enter") {
+      find(lookUpVal)
+    }
   }
 
 
   return (
     <div className="page">
-      <div id="stackDash">
-        <button onClick={popFromLinks}>POP</button>
+      <LinkedDash
+        addAtHead={(headValue) => addAtHead(headValue)}
+        addAtTail={(tailValue) => addAtTail(tailValue)}
+        popFromHead={popFromHead}
+        popFromTail={popFromTail}
+        find={(lookUpVal) => find(lookUpVal)}
+        unFind={unFind}
+        changeHeadValue={changeHeadValue}
+        changeTailValue={changeTailValue}
+        changeLookValue={changeLookValue}
+        keypressHead={keypressHead}
+        keypressTail={keypressTail}
+        keypressLook={keypressLook}
+        headValue={headValue}
+        tailValue={tailValue}
+        lookUpVal={lookUpVal}
+        inputHeadRef={inputHeadRef}
+        inputTailRef={inputTailRef}
+        inputLookRef={inputLookRef}
+      />
 
-        <div className="push">
-          <button onClick={() => pushToLinks(staValue)}>PUSH</button>
-          <input onChange={(e) => changeValue(e)}
-            value={staValue}
-            type="text"
-            ref={inputRef}
-            onKeyDown={keypressEnter}
-          />
-
-        </div>
-
-        <div className="peek">
-          <button onMouseDown={peek} onMouseUp={unPeek} >PEEK</button>
-          <h3>{topValue}</h3>
-        </div>
-
-
-      </div>
-
-      <Linked links={links}/>
+      <Linked links={links} />
 
     </div>
   );

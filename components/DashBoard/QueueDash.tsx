@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-export interface StackDashProps {
+export interface QueueDashProps {
   dequeue: () => void,
   queValue: string | number,
   enqueue: (queValue: string | number) => void,
@@ -12,7 +12,7 @@ export interface StackDashProps {
   topValue: string | number
 }
 
-const StackDash: React.FC<StackDashProps> = (
+const QueueDash: React.FC<QueueDashProps> = (
   { dequeue,
     queValue,
     enqueue,
@@ -26,10 +26,10 @@ const StackDash: React.FC<StackDashProps> = (
 
   return (
     <>
-      <div id="stackDash">
-        <button onClick={dequeue}>POP</button>
+      <div id="queueDash">
+        <button onClick={dequeue}>DEQUEUE</button>
         <div className="push">
-          <button onClick={() => enqueue(queValue)}>PUSH</button>
+          <button onClick={() => enqueue(queValue)}>ENQUEUE</button>
           <input onChange={(e) => changeValue(e)}
             value={queValue}
             type="text"
@@ -42,7 +42,7 @@ const StackDash: React.FC<StackDashProps> = (
         </div>
       </div>
       <style jsx>{`
-  #stackDash {
+  #queueDash {
     width: 100%;
     height: 80px;
     display: flex;
@@ -52,21 +52,21 @@ const StackDash: React.FC<StackDashProps> = (
     margin-top: 10px;
   }
   
-  #stackDash .peek, #stackDash .push{
+  #queueDash .peek, #queueDash .push{
     height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  #stackDash h3 {
+  #queueDash h3 {
     font-size: larger;
     color: white;
     text-align: center;
     width: 100px;
   }
   
-  #stackDash button {
+  #queueDash button {
     height: 40px;
     width: 120px;
     background: #ffffff;
@@ -76,19 +76,20 @@ const StackDash: React.FC<StackDashProps> = (
     border-radius: 8px;
   }
   
-  #stackDash button:hover {
+  #queueDash button:hover {
     color : #ffffff;
     background: rgb(38, 107, 55);
     cursor: pointer;
   }
   
-  #stackDash button:active {
+  #queueDash button:active {
     outline: none;
     border: none;
   }
   
-  #stackDash input {
+  #queueDash input {
     padding: 5px;
+    padding-left: 10px;
     margin-left: 5px;
     color: #03641b;
     font-weight: bold;
@@ -100,4 +101,4 @@ const StackDash: React.FC<StackDashProps> = (
   );
 }
 
-export default StackDash;
+export default QueueDash;

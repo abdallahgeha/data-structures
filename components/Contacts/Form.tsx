@@ -73,14 +73,14 @@ const Form: React.FC<FormProps> = () => {
   <style>{`
     #contactForm {
       width: 50%;
-      background-color: #f3f3f3;
+      background-color: #fff;
       border-radius: 20px;
       display: flex;
       flex-flow: column;
       justify-content: center;
       align-items: center;
       padding: 1rem 0.5rem 0.5rem 0.5rem;
-      box-shadow: 0px 25px 30px 0px rgba(0,0,0,0.5);
+      box-shadow: 0px 25px 30px 0px rgba(0, 0, 0,0.1);
       margin-left: 30px;
     }
     

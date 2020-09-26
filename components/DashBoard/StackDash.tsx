@@ -94,6 +94,7 @@ const StackDash: React.FC<StackDashProps> = (
     font-weight: bold;
     border-radius: 8px;
     box-shadow: none;
+    padding-left: 10px;
   }
   `}</style>
     </>

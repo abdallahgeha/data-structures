@@ -1,31 +1,33 @@
-import Head from 'next/head';
+import className from 'classnames'
 import Link from 'next/link';
+import { useState } from 'react';
 import { dataStructuresList } from '../constant/dataStructures'
 
 export default function Home() {
   return (
     <>
-    <div id="hero" >
-      <h1>Welcome to GWAB</h1>
-      <h3>Where we learn Data Structures and algorithms</h3>
-    </div>
-    <div className="page">
-      <div id="DataGrid">
-        {dataStructuresList.map((dataStructure, i) => {
-          if (dataStructure.available) {
-            return (<Link key={i} href={`/dataStructure${dataStructure.link}`}>
-              <a className="dataStructuesHomeLink" >{dataStructure.name}</a>
-            </Link>)
-          } else {
-            return (
-              <a key={i} className="dataStructuesHomeLinkSoon" >{dataStructure.name}</a>
-            )
-          }
-        })}
+      <div id="hero" >
+        <h1>Welcome to GWAB</h1>
+        <h3>Where we learn Data Structures and algorithms</h3>
       </div>
-      
-    </div>
-    <style jsx>{`
+      <div className="page">
+        <div id="DataGrid">
+          {dataStructuresList.map((dataStructure, i) => {
+            if (dataStructure.available) {
+              return (<Link key={i} href={`/dataStructure${dataStructure.link}`}>
+                <a
+                  className={className("dataStructuesHomeLink")}  >{dataStructure.name}</a>
+              </Link>)
+            } else {
+              return (
+                <a key={i} className={className("dataStructuesHomeLinkSoon")} >{dataStructure.name}</a>
+              )
+            }
+          })}
+        </div>
+
+      </div>
+      <style jsx>{`
       #hero {
         display: flex;
         flex-flow: column;
@@ -71,11 +73,14 @@ export default function Home() {
         align-items: center;
         background-color: #4CAF50;
         border-radius: 15px;
-        animation: fadeIn 1.5s ease-in-out;
+        opacity: 1; 
       }
+      
+      
       
       .dataStructuesHomeLink:hover {
         background-color: #03641b;
+        transform: scale(0.97)
       }
       
       .dataStructuesHomeLinkSoon {
@@ -90,6 +95,7 @@ export default function Home() {
         align-items: center;
         background-color: #415c42;
         border-radius: 15px;
+        opacity: 1; 
       }
       
       .dataStructuesHomeLinkSoon::after {
@@ -97,23 +103,7 @@ export default function Home() {
         color: #999999;
         font-size: 22px;
       }
-
-      @keyframes fadeIn {
-        0% {
-            transform: scale(0);
-            opacity: 0.0;       
-        }
-        60% {
-            transform: scale(1.1);  
-        }
-        80% {
-            transform: scale(0.9);
-            opacity: 1; 
-        }   
-        100% {
-            transform: scale(1);
-            opacity: 1; 
-        }       
+      
     }
         
         `}</style>

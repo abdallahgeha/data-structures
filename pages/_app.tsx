@@ -3,7 +3,8 @@ import type { AppProps /*, AppContext */ } from 'next/app';
 import NavBar from '../components/navbar';
 import { PageTransition } from 'next-page-transitions'
 import Footer from '../components/footer';
-import '../styles.css'
+import '../styles.css';
+import '../fontawesomeIcon'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   let TIME_OUT = 150

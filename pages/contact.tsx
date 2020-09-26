@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import Form from '../components/Form';
+import Form from '../components/Contacts/Form';
 import LinkContact from '../components/Contacts/LinkContact'
 import { contactText } from '../constant/about'
 

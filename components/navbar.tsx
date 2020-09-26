@@ -45,6 +45,7 @@ const NavBar: React.FC = () => {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        
       }
 
       .dropbtn {
@@ -68,6 +69,7 @@ const NavBar: React.FC = () => {
         align-items: center;
         height: 60px;
         width: 100px;
+        flex-shrink: 0;
       }
       a:hover {
         background: rgba(76, 175, 80, 0.5);

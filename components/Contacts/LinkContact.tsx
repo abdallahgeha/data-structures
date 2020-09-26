@@ -1,12 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const LinkContact: React.FC = () => {
     return (
         <div className="linkContact">
-            <a href="https://github.com/abdallahgeha" className="linkedContact github"><div className="icon"/><h4>Github</h4></a>
-            <a href="https://www.linkedin.com/in/abdallah-geha-29a30185/" className="linkedContact linkedin"><div className="icon"/><h4>LinkedIn</h4></a>
-            <a href="https://www.facebook.com/aboud.giha/" className="linkedContact facebook"><div className="icon"/><h4>Facebook</h4></a>
-            <a href="mailto:geha.abdallah.dev@gmail.com" className="linkedContact email"><div className="icon"/><h4>Email</h4></a>
+            <a href="https://github.com/abdallahgeha" className="linkedContact github"><FontAwesomeIcon className="icon" icon={['fab', 'github']} /><h4>Github</h4></a>
+            <a href="https://www.linkedin.com/in/abdallah-geha-29a30185/" className="linkedContact linkedin"><FontAwesomeIcon className="icon" icon={['fab', 'linkedin']} /><h4>LinkedIn</h4></a>
+            <a href="https://www.facebook.com/aboud.giha/" className="linkedContact facebook"><FontAwesomeIcon className="icon" icon={['fab', 'facebook']} /><h4>Facebook</h4></a>
+            <a href="mailto:geha.abdallah.dev@gmail.com" className="linkedContact email"><FontAwesomeIcon className="icon" icon='envelope' /><h4>Email</h4></a>
+
             <style jsx>{`
 
             .linkContact{
@@ -17,6 +19,7 @@ const LinkContact: React.FC = () => {
                 justify-content: center;
                 align-items: center;
                 padding: 50px;
+                
             }      
 
             .linkContact > a {
@@ -32,18 +35,18 @@ const LinkContact: React.FC = () => {
             .facebook {background : #3b5998}
             .email {background : #c71610}
 
+            .github:hover {background : rgba(0, 0, 0, 0.7)}
+            .linkedin:hover {background : rgba(0, 114, 177, 0.7)}
+            .facebook:hover {background : rgba(59, 89, 152, 0.7)}
+            .email:hover {background : rgba(199, 22, 16, 0.7)}
+
             .linkedContact {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 font-size: 22px;
-            }
+                box-shadow: 12px 12px 20px -15px rgba(0,0,0,0.63);
 
-            div.icon {
-                height: 40px;
-                width: 40px;
-                margin-left: 20px;
-                background : #999999;
             }
 
             h4 {

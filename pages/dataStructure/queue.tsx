@@ -27,6 +27,7 @@ const Queue: React.FC = () => {
     changeQue(newQueue)
     setTimeout(() => {
       let update = newQueue.slice(1, newQueue.length)
+      changeQue([])
       changeQue(update)
     }, 500)
 
@@ -124,13 +125,14 @@ const Queue: React.FC = () => {
           animation-duration: 500ms;
           transition-duration: 500ms;
           transform: translateX(-50%);
+          color: white;
           opacity: 0;
         }
 
         @keyframes queueUp {
           0% {
               transform: translateY(50px);
-              opacity: 0.0;       
+              opacity: 1;       
           }   
           100% {
               transform: translateY(0);
