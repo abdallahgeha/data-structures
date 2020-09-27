@@ -8,8 +8,8 @@ type queueLocalStorage = [Que[], (value: Que[]) => void];
 const Queue: React.FC = () => {
 
   const [que, changeQue] = useLocalStorage<Que[]>('Prioqueue', [
-    { value: "2", visible: true, priority: 2 },
-    { value: "1", visible: true, priority: 3  },
+    { value: "2", visible: true, priority: 3 },
+    { value: "1", visible: true, priority: 2  },
     { value: "5", visible: true, priority: 1  }]) as queueLocalStorage
 
   const [queValue, setQueValue] = useState<string | number>("");
