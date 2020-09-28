@@ -1,6 +1,6 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
-import NavBar from '../components/navbar';
+import NavBar from '../components/navigation/navbar';
 import { PageTransition } from 'next-page-transitions'
 import Footer from '../components/footer';
 import '../styles.css';

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRef } from 'react';
-import useOnClickOutside from '../hooks/useOnClickOutside'
+import useOnClickOutside from '../../hooks/useOnClickOutside'
 
 export interface DropDownProps {
   dataStructures: { name: String, link: String, img: String, available: boolean }[]
@@ -29,27 +29,34 @@ const DropDown: React.FC<DropDownProps> = ({ dataStructures, drop, rollUp }) => 
       })}
 
       <style>{`
-        .dropdown-content {
-          position: absolute;
-          background-color: #f1f1f1;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-        
-        .dropdown-content .dataStructuesLink {
-          color: black;
-          padding: 12px 16px;
-          font-weight: 300;
-          text-decoration: none;
-          display: block;
-        }
-        
-        .dropdown-content .dataStructuesLink:hover {background-color: #ddd;}
+      .dropdown-content {
+        position: absolute;
+        top: 70px;
+        background-color: #f1f1f1;
+        width: 100%;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+      
+      .dropdown-content .dataStructuesLink {
+        color: black;
+        padding: 12px 16px;
+        font-weight: 300;
+        text-decoration: none;
+        display: block;
+      }
+      
+      .dropdown-content .dataStructuesLink:hover {background-color: #ddd;}
 
-        .closed {display: none;}
-        .open {display: block;}
+      .closed {display: none;}
+      .open {display: block;}
+
+      @media screen and (min-width: 800px) {
+        .dropdown-content {
+          min-width: 140px;
+        }
         
+      }       
         `}</style>
 
     </div>
