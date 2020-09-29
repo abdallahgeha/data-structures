@@ -1,21 +1,29 @@
 import Link from 'next/link';
 import DropDown from './dropDown';
 import { dataStructuresList } from '../../constant/dataStructures'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const NavBar: React.FC = () => {
   const [isdroped, drop] = useState(false)
+  const checkBoxRef = useRef<HTMLInputElement>(null) !;
 
-  const dropdown = () => drop(!isdroped)
+  const dropdown = () => {
+    drop(!isdroped)
+    let status = checkBoxRef?.current?.checked
+    if(checkBoxRef?.current) {
+      checkBoxRef.current.checked = !status
+    }
+  }
 
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     drop(!isdroped)
   }
 
+
   return (<>
     <header>
       <Link href="/"><a className="logo">GWAB</a></Link>
-      <input type="checkbox" id="nav-toggle" className="nav-toggle"></input>
+      <input ref={checkBoxRef} type="checkbox" id="nav-toggle" className="nav-toggle"></input>
       <nav>
         <ul>
           <li><Link href="/about"><a>About</a></Link></li>
