@@ -1,9 +1,12 @@
 import className from 'classnames'
 import Link from 'next/link';
-import { useState } from 'react';
 import { dataStructuresList } from '../constant/dataStructures'
+import useIntersectionObserver from '../hooks/useIntersectionObserver'
 
 export default function Home() {
+
+  const [dataGridRef, entry] = useIntersectionObserver({})
+  
   return (
     <>
       <div id="hero" >
@@ -11,16 +14,16 @@ export default function Home() {
         <h3>Where we learn Data Structures and algorithms</h3>
       </div>
       <div className="page">
-        <div id="DataGrid">
+        <div ref={dataGridRef} id="DataGrid">
           {dataStructuresList.map((dataStructure, i) => {
             if (dataStructure.available) {
               return (<Link key={i} href={`/dataStructure${dataStructure.link}`}>
                 <a
-                  className={className("dataStructuesHomeLink")}  >{dataStructure.name}</a>
+                  className={className("dataStructuesHomeLink", {aniamteEntry: entry?.isVisible})}  >{dataStructure.name}</a>
               </Link>)
             } else {
               return (
-                <a key={i} className={className("dataStructuesHomeLinkSoon")} >{dataStructure.name}</a>
+                <a key={i} className={className("dataStructuesHomeLinkSoon", {aniamteEntry: entry?.isVisible})} >{dataStructure.name}</a>
               )
             }
           })}
@@ -102,6 +105,21 @@ export default function Home() {
         content: "Comming soon";
         color: #999999;
         font-size: 22px;
+      }
+
+      .aniamteEntry{
+        animation: enter 1s;
+      }
+
+      @keyframes enter {
+        from {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0px);
+        }
       }
       
     }

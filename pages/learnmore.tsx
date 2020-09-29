@@ -1,5 +1,5 @@
 
-const LearnMore: React.SFC = () => {
+const LearnMore: React.FC = () => {
   return ( 
     <div className="page">
       <h1>Learn More</h1>
