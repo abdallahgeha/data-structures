@@ -4,6 +4,7 @@ export const dataStructuresList = [
   {name: "Linked List", link:"/linkedlist", img:"", available: true},
   {name: "Doubly Linked List", link:"/doublylinkedlist", img:"", available: true},
   {name: "Priority Queue", link:"/priorityqueue", img:"", available: true},
+  {name: "Hash Map", link:"/hashmap", img:"", available: true},
   {name: "Min Heap", link:"/minheap", img:"", available: false},
   {name: "Max Heap", link:"/maxheap", img:"", available: false},
   {name: "Priority Queue", link:"/priorityqueue", img:"", available: false},
