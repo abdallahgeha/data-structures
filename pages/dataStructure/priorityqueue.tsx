@@ -71,7 +71,7 @@ const Queue: React.FC = () => {
   }
 
   const peek = () => {
-    let toppestVal = que[que.length - 1]?.value || '';
+    let toppestVal = que[0]?.value || "";
     setTopValue(toppestVal)
   }
 
