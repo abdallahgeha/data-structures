@@ -1,4 +1,3 @@
-// import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app';
 import NavBar from '../components/navigation/navbar';
 import { PageTransition } from 'next-page-transitions'
