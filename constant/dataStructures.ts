@@ -1,4 +1,5 @@
 export const dataStructuresList = [
+  {name: "Array", link:"/array", img:"", available: true},
   {name: "Queue", link:"/queue", img:"", available: true},
   {name: "Stack", link:"/stack", img:"", available: true},
   {name: "Linked List", link:"/linkedlist", img:"", available: true},
