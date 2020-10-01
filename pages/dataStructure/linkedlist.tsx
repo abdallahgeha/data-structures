@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
-import Linked from '../../components/linked';
+import Linked from '../../components/Elements/linked';
 import LinkedDash from '../../components/DashBoard/LinkedListDash'
-// import useLocalStorage from "../../hooks/useLocalStorage";
 
 type Link = {
   value: string | number,
   visible: boolean,
   found: boolean
 }
+
 type LinkLocalStorage = [Link[], (value: Link[]) => void];
 
 
@@ -22,11 +22,9 @@ const LinkedList: React.FC = () => {
   const [tailValue, setTailValue] = useState<string | number>("");
   const [lookUpVal, setLookUpVal] = useState<string | number>("");
 
-
   const inputHeadRef = useRef<HTMLInputElement>(null);
   const inputTailRef = useRef<HTMLInputElement>(null);
   const inputLookRef = useRef<HTMLInputElement>(null);
-
 
   const popFromHead = () => {
     let newLinks = [...links]
@@ -47,9 +45,7 @@ const LinkedList: React.FC = () => {
     }, 350)
   }
 
-
   const addAtTail = (tailValue: string | number) => {
-
     if (tailValue) {
       changeLinks([...links, { value: tailValue, visible: true, found: false }])
       setTailValue("")
@@ -65,7 +61,6 @@ const LinkedList: React.FC = () => {
     }
   }
 
-
   const changeHeadValue = (val: React.ChangeEvent<HTMLInputElement>) => {
     setHeadValue(val.target.value)
   }
@@ -78,27 +73,24 @@ const LinkedList: React.FC = () => {
     setLookUpVal(val.target.value)
   }
 
-
-
-  
   const find = (lookUpValue: string | number) => {
     const foundLinks = [...links]
     for (const link of links) {
-      if(link.value == lookUpValue){
+      if (link.value == lookUpValue) {
         link.found = true
       }
     }
-    
+
     changeLinks(foundLinks)
     inputLookRef.current?.focus()
   }
-  
+
   const unFind = () => {
     const foundLinks = [...links]
     for (const link of links) {
       link.found = false
     }
-    
+
     changeLinks(foundLinks)
   }
 
@@ -113,7 +105,7 @@ const LinkedList: React.FC = () => {
       addAtTail(tailValue)
     }
   }
-  
+
   const keypressLook = (e: React.KeyboardEvent) => {
     if (e.key == "Enter") {
       find(lookUpVal)

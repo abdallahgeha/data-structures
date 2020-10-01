@@ -29,7 +29,8 @@ const Array: React.FC = () => {
       settheArray(newArray)
       setTimeout(() => {
         newArray.pop()
-        settheArray([...newArray])
+        const newer = [...newArray]
+        settheArray(newer)
       }, 500)
     }
   }

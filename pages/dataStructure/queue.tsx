@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import QueueDash from '../../components/DashBoard/QueueDash';
 import useLocalStorage from "../../hooks/useLocalStorage";
+import QueueElements from '../../components/Elements/QueueElements'
 
 type Que = { value: string | number, visible: boolean }
 type queueLocalStorage = [Que[], (value: Que[]) => void];
@@ -16,10 +17,6 @@ const Queue: React.FC = () => {
   const [topValue, setTopValue] = useState<string | number>("")
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  let queues = que.map((qu, i) => (
-    <div key={`queue ${i}`} className={qu.visible ? "que" : "queDelete"}>{qu.value}</div>
-  ))
 
   const dequeue = () => {
     let newQueue = [...que]
@@ -72,9 +69,8 @@ const Queue: React.FC = () => {
         peek={peek}
         unPeek={unPeek}
         topValue={topValue} />
-      <div id="queue">
-        {queues}
-      </div>
+
+      <QueueElements queue={que} />
 
       <style>
         {`

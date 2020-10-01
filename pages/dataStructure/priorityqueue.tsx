@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
 import QueuePrioDash from '../../components/DashBoard/QueuePrioDash';
 import useLocalStorage from "../../hooks/useLocalStorage";
+import PriotiryQueueElements from '../../components/Elements/PriorityQueueElements'
 
 type Que = { value: string | number, visible: boolean, priority: number }
 type queueLocalStorage = [Que[], (value: Que[]) => void];
 
-const Queue: React.FC = () => {
+const PriorityQueue: React.FC = () => {
 
   const [que, changeQue] = useLocalStorage<Que[]>('Prioqueue', [
     { value: "2", visible: true, priority: 3 },
@@ -18,14 +19,6 @@ const Queue: React.FC = () => {
   const [topValue, setTopValue] = useState<string | number>("")
 
   const inputRef = useRef<HTMLInputElement>(null);
-  
-
-  let queues = que.map((qu, i) => (
-    <div key={`queue ${i}`} className={!qu.visible ? "queDelete" :"que" }>
-      <div className="queVal" >{qu.value}</div>
-      <p>{qu.priority}</p>
-    </div>
-  ))
 
   const dequeue = () => {
     let newQueue = [...que]
@@ -36,7 +29,6 @@ const Queue: React.FC = () => {
       changeQue([])
       changeQue(update)
     }, 500)
-
   }
 
   const enqueue = (queValue: string | number, quePriority : number) => {
@@ -93,9 +85,8 @@ const Queue: React.FC = () => {
         topValue={topValue} 
         quePriority={quePriority}
         changePrioValue={changePrioValue} />
-      <div id="queue">
-        {queues}
-      </div>
+
+      <PriotiryQueueElements priorityQueue={que}/>
 
       <style>
         {`
@@ -193,4 +184,4 @@ const Queue: React.FC = () => {
   );
 }
 
-export default Queue;
+export default PriorityQueue;

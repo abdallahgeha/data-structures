@@ -1,15 +1,10 @@
 import { useState, useRef } from "react";
-// import useLocalStorage from '../../hooks/useLocalStorage'
-import HashTableDash from '../../components/DashBoard/HashTableDash'
+import HashTableDash from '../../components/DashBoard/HashTableDash';
+import HashElement from '../../components/Elements/HashElements'
 
 type Hash = { key: string, value: (string | number), visible: boolean, randIndex: number };
-// type hashLocalStorage = [Hash[], (value: Hash[]) => void];
 
 const Stack: React.FC = () => {
-  // const [hashTable, changeHashTable] = useLocalStorage<Hash[]>('hash', [
-  //   { key: "", value: "2", visible: true },
-  //   { key: "", value: "1", visible: true },
-  //   { key: "", value: "5", visible: true }]) as hashLocalStorage;
 
   const randomizer = () => Math.floor(Math.random() * 255)
 
@@ -23,28 +18,12 @@ const Stack: React.FC = () => {
 
   const inputKeyRef = useRef<HTMLInputElement>(null);
 
-  const keys = hashTable.map((hashT, i) => (
-    <div key={`key ${i}`} className={hashT.visible ? "sta" : "staDelete"}>{hashT.key}</div>
-  ))
-
-  let values = () => {
-    const randomized = hashTable.sort((a, b) => (a.randIndex - b.randIndex))
-
-    return randomized.map((hashT, i) => {
-      return (
-        <div key={`allval ${i}`} className="value">
-          <div key={`index ${i}`} className='index'>{hashT.randIndex}</div>
-          <div key={`value ${i}`} className={hashT.visible ? "val" : "staDelete"}>{hashT.value}</div>
-        </div>
-      )
-    })
-  }
-
   const addNewEntry = (hashKey: string, hashValue: string | number) => {
     let hashKeyArray = hashTable.map(e => e.key)
     let isIncluded = hashKeyArray.includes(hashKey)
-    if(isIncluded) {
-      let newHashTable = [...hashTable].map(e => {
+    if (isIncluded) {
+      const tempHashTable = [...hashTable]
+      const newHashTable = tempHashTable.map(e => {
         if (e.key == hashKey) {
           e.value = hashValue
         }
@@ -52,7 +31,7 @@ const Stack: React.FC = () => {
       })
       changeHashTable(newHashTable)
     }
-    if (hashKey && hashValue) {
+    else if (hashKey && hashValue) {
       changeHashTable([...hashTable, { key: hashKey, value: hashValue, visible: true, randIndex: randomizer() }])
     }
     setHashValue("")
@@ -86,11 +65,9 @@ const Stack: React.FC = () => {
         changeValue={changeValue}
         keypressEnter={keypressEnter}
       />
-      <div className="hash">
-        <div id="stack">{keys}</div>
-        <div className="blackBox">BLACK BOX</div>
-        <div className="hashMap">{values()}</div>
-      </div>
+
+      <HashElement hashTable={hashTable} />
+
       <style>
         {`
 

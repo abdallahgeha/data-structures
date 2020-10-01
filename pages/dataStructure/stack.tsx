@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
-import useLocalStorage from '../../hooks/useLocalStorage'
-import StackDash from '../../components/DashBoard/StackDash'
+import useLocalStorage from '../../hooks/useLocalStorage';
+import StackDash from '../../components/DashBoard/StackDash';
+import StackElement from '../../components/Elements/StackElements'
 
 type Sta = { value: (string | number), visible: boolean };
 type stackLocalStorage = [Sta[], (value: Sta[]) => void];
@@ -15,10 +16,6 @@ const Stack: React.FC = () => {
   const [topValue, setTopValue] = useState<string | number>("");
 
   const inputRef = useRef<HTMLInputElement>(null);
-
-  let stacks = stack.map((sta, i) => (
-    <div key={`stack ${i}`} className={sta.visible ? "sta" : "staDelete"}>{sta.value}</div>
-  ))
 
   const popFromStack = () => {
     let newStack = [...stack]
@@ -69,7 +66,9 @@ const Stack: React.FC = () => {
         peek={peek}
         unPeek={unPeek}
         topValue={topValue} />
-      <div id="stack">{stacks}</div>
+
+      <StackElement stack={stack} />
+      
       <style>
         {`
 

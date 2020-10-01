@@ -1,15 +1,14 @@
 import { useState, useRef } from "react";
-import DoublyLinked from '../../components/doublyLinked';
+import DoublyLinked from '../../components/Elements/doublyLinked';
 import LinkedDash from '../../components/DashBoard/LinkedListDash'
-// import useLocalStorage from "../../hooks/useLocalStorage";
 
 type DoublyLink = {
   value: string | number,
   visible: boolean,
   found: boolean
 }
-type DoublyLinkLocalStorage = [DoublyLink[], (value: DoublyLink[]) => void];
 
+type DoublyLinkLocalStorage = [DoublyLink[], (value: DoublyLink[]) => void];
 
 const DoublyLinkedList: React.FC = () => {
 
@@ -22,11 +21,9 @@ const DoublyLinkedList: React.FC = () => {
   const [tailValue, setTailValue] = useState<string | number>("");
   const [lookUpVal, setLookUpVal] = useState<string | number>("");
 
-
   const inputHeadRef = useRef<HTMLInputElement>(null);
   const inputTailRef = useRef<HTMLInputElement>(null);
   const inputLookRef = useRef<HTMLInputElement>(null);
-
 
   const popFromHead = () => {
     let newLinks = [...links]
@@ -47,7 +44,6 @@ const DoublyLinkedList: React.FC = () => {
     }, 350)
   }
 
-
   const addAtTail = (tailValue: string | number) => {
 
     if (tailValue) {
@@ -65,7 +61,6 @@ const DoublyLinkedList: React.FC = () => {
     }
   }
 
-
   const changeHeadValue = (val: React.ChangeEvent<HTMLInputElement>) => {
     setHeadValue(val.target.value)
   }
@@ -77,9 +72,6 @@ const DoublyLinkedList: React.FC = () => {
   const changeLookValue = (val: React.ChangeEvent<HTMLInputElement>) => {
     setLookUpVal(val.target.value)
   }
-
-
-
   
   const find = (lookUpValue: string | number) => {
     const foundLinks = [...links]
